@@ -1,8 +1,6 @@
 
 import 'package:flutter/material.dart';
-
-import 'Animaciones/pasar_color_a_otro.dart';
-import 'Animaciones/texto.dart';
+import 'package:practicar_animacion/src/principal.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -12,8 +10,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Center(
-        //child: AnimacionColor(),
-        child: TextoAnimations(),
+        child: Principal(),
       ),
     );
   }

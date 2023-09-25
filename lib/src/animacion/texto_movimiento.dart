@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -40,20 +42,57 @@ class TextoMovimiento extends StatelessWidget {
             ),
 
             // Widget de animacion sencilla y personalizada que va a manejar un double
+            // TweenAnimationBuilder<double>(
+            //   tween: Tween(begin: 1.0, end: 0.0,), // Interpolacion del inicio y final de la animación (value)
+            //   duration: const Duration(seconds: 1), // Duración de animación
+            //   builder: (context, value, child) {
+            //     // Manejo del Transfform.translate
+            //     return Transform.translate(
+            //       offset: Offset(-MediaQuery.of(context).size.width * value, 0.0), /* Maneja como aparecera la animación 
+            //                                         entre el eje X y Y*/
+            //       child: child, // Lo que se va animar
+            //     );
+            //   },
+            //   child: SvgPicture.asset( 
+            //     'assets/usuario.svg',
+            //     width: 50,
+            //   ), // widget animar (child)
+            // ),
+
             TweenAnimationBuilder<double>(
-              tween: Tween(begin: 1.0, end: 0.0,), // Interpolacion del inicio y final de la animación (value)
+              tween: Tween(begin: 0.0, end: 1.0,), // Interpolacion del inicio y final de la animación (value)
               duration: const Duration(seconds: 1), // Duración de animación
               builder: (context, value, child) {
                 // Manejo del Transfform.translate
-                return Transform.translate(
-                  offset: Offset(-MediaQuery.of(context).size.width * value, 0.0), /* Maneja como aparecera la animación 
-                                                    entre el eje X y Y*/
-                  child: child, // Lo que se va animar
+                return Transform(
+                  alignment: Alignment.center,
+                  transform: Matrix4.identity()
+                    ..scale(value * 4.0), // animacion para agrandar la imagen
+                    //..rotateZ(pi * (_value * 2)), // Rotaion en Z
+                  child: TweenAnimationBuilder<double>(
+                    curve: Curves.bounceInOut,
+              tween: Tween(begin: 1.0, end: 0.1,), // Interpolacion del inicio y final de la animación (value)
+              duration: const Duration(seconds: 1), // Duración de animación
+              builder: (context, value, child) {
+                // Manejo del Transfform.translate
+                return Transform(
+                  alignment: Alignment.center,
+                  transform: Matrix4.identity()
+                    ..scale(value * 4.0), // animacion para agrandar la imagen
+                    //..rotateZ(pi * (_value * 2)), // Rotaion en Z
+                  child: child,
                 );
               },
               child: SvgPicture.asset( 
-                'assets/usuario.svg',
-                width: 50,
+                    'assets/usuario.svg',
+                    width: 50,
+              ), // widget animar (child)
+            ),
+                );
+              },
+              child: SvgPicture.asset( 
+                    'assets/usuario.svg',
+                    width: 50,
               ), // widget animar (child)
             ),
 

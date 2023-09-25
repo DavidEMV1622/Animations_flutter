@@ -33,23 +33,36 @@ class _TransformAnimationsState extends State<TransformAnimations> {
             height: 80,
           ),
 
-          // Transform.scale(
-          //   scale: _value * 4,
-          //   child: SvgPicture.asset( 
-          //     'assets/usuario.svg',
-          //     width: 100,
-          //   ),
-          // ),
+          // Transform con animacion de agrandar y desaparecer
+          Transform.scale(
+            scale: _value * 4,
+            child: SvgPicture.asset( 
+              'assets/usuario.svg',
+              width: 100,
+            ),
+          ),
 
-          // Transform.rotate(
-          //   angle: _value * 6.3,
-          //   child: SvgPicture.asset( 
-          //     'assets/usuario.svg',
-          //     width: 100,
-          //   ),
-          // ),
+          // Transform con rotacion 
+          /* Transform.rotate(
+            angle: _value * 6.3,
+            child: SvgPicture.asset( 
+              'assets/usuario.svg',
+              width: 100,
+            ),
+          ), */
 
-          Transform(
+          // Transform con animacion entre el eje X y Y
+          /* Transform.translate(
+            offset: Offset(50 * (_value), 0.0), // Animacion del eje X y Y
+            child:  SvgPicture.asset( 
+              'assets/usuario.svg',
+              width: 50,
+            ),
+          ), */
+
+
+          // Transform con multiples transformaciones
+          /* Transform(
             alignment: Alignment.center,
             transform: Matrix4.identity()
               ..scale(_value * 4.0) // animacion para agrandar la imagen
@@ -61,7 +74,7 @@ class _TransformAnimationsState extends State<TransformAnimations> {
               'assets/usuario.svg',
               width: 50,
             ),
-          ),
+          ), */
 
           const SizedBox(
             height: 80,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:practicar_animacion/src/animacion/texto_movimiento.dart';
 import 'package:practicar_animacion/src/transform_animation/PageViewImagesAnimations.dart';
+import 'package:practicar_animacion/src/transform_animation/list_animations.dart';
 import 'package:practicar_animacion/src/transform_animation/transform.dart';
 
 
@@ -60,6 +61,14 @@ class Principal extends StatelessWidget {
             ElevatedButton(onPressed: () => 
             Navigator.push(context, MaterialPageRoute(builder: (context) => const PageViewImagesAnimations())), 
             child: const Text("transform en PageView")),
+
+            const SizedBox(
+              height: 10,
+            ),
+
+            ElevatedButton(onPressed: () => 
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const AnimationsList())), 
+            child: const Text("list animations")),
 
             const SizedBox(
               height: 10,

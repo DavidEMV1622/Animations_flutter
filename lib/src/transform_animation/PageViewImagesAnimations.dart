@@ -82,8 +82,8 @@ class _PageViewImagesAnimationsState extends State<PageViewImagesAnimations> {
               final value = percent.clamp(0.0, 1.0); // Se define la interpolación de inicio y final
 
               print(percent); /* Imprime el valor del porcentaje actual al hacer el scroll entre
-                                  0 y 1 para poder identificar los cambios que hay a la hora de
-                                  realizar una animación al hacer un scroll*/
+                              0 y 1 para poder identificar los cambios que hay a la hora de
+                              realizar una animación al hacer un scroll*/
 
               return Padding(
                 padding: const EdgeInsets.all(20.0),

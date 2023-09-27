@@ -40,44 +40,97 @@ class _AnimationsListState extends State<AnimationsList> {
         title: Text("Animations List"),
       ),
 
-      body: CustomScrollView(
-        controller: scrollController,
+      body: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: CustomScrollView(
+          controller: scrollController,
+      
+          slivers: <Widget>[
+            const SliverAppBar(
+              automaticallyImplyLeading: false, // Elimina el boton de flecha
+              title: Center(child: Text("Iconos de Arboles", style: TextStyle(color: Colors.black, ),)),
+              pinned: true, // "true" se queda fijo el appBar al hacer scroll, "false" lo contrario
+              backgroundColor: Colors.amber,
+              elevation: 0,
+            ),
 
-        slivers: <Widget>[
-          SliverList(delegate: SliverChildBuilderDelegate((context, index) {
-            final card = constructorImages[index];
-            final cardPosition = index * sizeCards; // Obtiene la posición actual del primer card
-            final difference = scrollController.offset - cardPosition;
-            if (difference == 0) print(difference);
-
-            return Padding(
-              padding: const EdgeInsets.all(15.0),
+            const SliverToBoxAdapter(
               child: SizedBox(
-                height: sizeCards,
+                height: 100,
+              ),
+            ),
 
-                child: Card(
-                  color: card.colorBase,
-
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Row(children: <Widget>[
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                          Text("Titulo: ${card.title}"),
-                          Text("Descripcion: ${card.description}"),
-                        ],),
+            SliverList(delegate: SliverChildBuilderDelegate((context, index) {
+              final card = constructorImages[index];
+              /* Se divide entre 1.25 para tomar en cuenta las cards que estan encima del otro 
+              se saca multiplicando el espacio del heightFactor (0.8) por el valor aproximado (1.25)
+              y el resultado tiene que dar 1, si no, es posible que la animacion del scroll se adelante (r > 1)
+              o se retrase (r < 1) (OTRA FORMA 1)*/
+              //final cardPositionOffset = index * sizeCards / 1.25; // Obtiene la posición actual del primer card
+              
+              /* Se multiplica el ancho de las cards (sizeCards) por 0.5 que es el espacio que se
+              abarca cada card en uno encima del otro con el heightFacto para que no se adelante 
+              ni se retrase la animacion al hacer el scroll (OTRA FORMA 2) */
+              final cardPositionOffset = index * (sizeCards * 0.5);
+              final difference = scrollController.offset - cardPositionOffset; 
+              if (index == 0) print("Valor de diferencia entre cada card = $difference");
+              //final percent = 1 - (difference / (sizeCards / 1.25)); 
+              final percent = 1 - (difference / (sizeCards * 0.5));
+              if (index == 0) print("Valor de interpolacion = $percent");
+      
+              /* Condicion para que se cumpla la condicion del Opacity 
+              opacity >= 0.0 && opacity <= 1.0 is not true
+              Y definir la interpolación entre 0 y 1*/
+              double value = percent;
+              if (percent < 0.0) value = 0.0;
+              if (percent > 1.0) value = 1.0;
+              
+      
+              return Align(
+                heightFactor: 0.5,
+                child: SizedBox(
+                  height: sizeCards,
+                    
+                  child: Opacity(
+                    opacity: value,
+                    
+                    child: Transform(
+                      transform: Matrix4.identity()
+                        ..scale(value, 1.0)
+                        ,
+                        alignment: Alignment.center,
+                      child: Card(
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20.0),
+                            topRight: Radius.circular(20.0),
+                          ),
+                        ),
+                        color: card.colorBase,
+                                    
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Row(children: <Widget>[
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                Text("Titulo: ${card.title}"),
+                                Text("Descripcion: ${card.description}"),
+                              ],),
+                            ),
+                            card.image,
+                          ]),
+                        ),
                       ),
-                      card.image,
-                    ]),
+                    ),
                   ),
                 ),
-              ),
-            );
-          }, childCount: constructorImages.length))
-        ],
+              );
+            }, childCount: constructorImages.length))
+          ],
+        ),
       ),
     );
   }

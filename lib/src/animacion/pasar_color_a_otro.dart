@@ -12,6 +12,7 @@ class AnimacionColor extends StatelessWidget {
 
       body: Center(
         // Widget de animacion sencilla y personalizada que va a manejar un color
+        // Este widget permite ejecutar la animacion una vez que se muestre la pantalla 
         child: TweenAnimationBuilder<Color?>(
            duration: const Duration(seconds: 1), // Tiempo que dura la animacion
           tween: ColorTween(begin: Colors.red, end: Colors.blue,),  /* Color en que inicia (rojo) y finaliza (azul)*/

@@ -8,7 +8,7 @@ class TextoMovimiento extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Texto en movimiento"),
+        title: const Text("Texto en movimiento"),
       ),
 
       body: Center(
@@ -17,7 +17,8 @@ class TextoMovimiento extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
 
-            // Widget de animacion sencilla y personalizada que va a manejar un double
+            /* Widget de animacion sencilla y personalizada cuando se inicie la pantalla, 
+            que va a manejar un double */
             // Manejo del primer Texto
             TweenAnimationBuilder<double>(
               tween: Tween(begin: 1.0, end: 0.0,), // Interpolacion del inicio y final de la animación (value)
@@ -26,7 +27,7 @@ class TextoMovimiento extends StatelessWidget {
 
                 // Manejo del Transfform.translate
                 /*Se utiliza para poder hacer una animación donde el moviendo del texto es de derecha a izquierda
-                (eje X) y de arriba abajo (eje Y) usuando la propiedad "offset"*/
+                (eje X) y de arriba abajo (eje Y) usando la propiedad "offset"*/
                 return Transform.translate(
                   offset: Offset(0.0, -300 * value), /* Maneja como aparecera la animación 
                                                     entre el eje X y Y*/
@@ -40,7 +41,6 @@ class TextoMovimiento extends StatelessWidget {
               height: 20,
             ),
 
-            // Widget de animacion sencilla y personalizada que va a manejar un double
             // Manejo de una imagen
             TweenAnimationBuilder<double>(
               tween: Tween(begin: 1.0, end: 0.0,), // Interpolacion del inicio y final de la animación (value)
@@ -105,7 +105,6 @@ class TextoMovimiento extends StatelessWidget {
               height: 20,
             ),
 
-            // Widget de animacion sencilla y personalizada que va a manejar un double
             // Manejo del segundo texto
             TweenAnimationBuilder<double>(
               tween: Tween(begin: 1.0, end: 0.0,), // Interpolacion del inicio y final de la animación (value)

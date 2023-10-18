@@ -70,7 +70,7 @@ class _AnimationsListState extends State<AnimationsList> {
               
               /* Se multiplica el ancho de las cards (sizeCards) por 0.5 que es el espacio que se
               abarca cada card en uno encima del otro con el heightFacto para que no se adelante 
-              ni se retrase la animacion al hacer el scroll (OTRA FORMA 2) */
+              ni se retrase la animacion al hacer el scroll (OTRA FORMA 2), esto mismo se aplica  */
               final cardPositionOffset = index * (sizeCards * 0.5);
               final difference = scrollController.offset - cardPositionOffset; 
               if (index == 0) print("Valor de diferencia entre cada card = $difference");
@@ -78,7 +78,7 @@ class _AnimationsListState extends State<AnimationsList> {
               final percent = 1 - (difference / (sizeCards * 0.5));
               if (index == 0) print("Valor de interpolacion = $percent");
       
-              /* Condicion para que se cumpla la condicion del Opacity 
+              /* 2 if para que se cumpla la condicion del Opacity 
               opacity >= 0.0 && opacity <= 1.0 is not true
               Y definir la interpolación entre 0 y 1*/
               double value = percent;
@@ -100,13 +100,13 @@ class _AnimationsListState extends State<AnimationsList> {
                         ,
                         alignment: Alignment.center,
                       child: Card(
-                        shape: const RoundedRectangleBorder(
+                        shape: const RoundedRectangleBorder( // Manejo de los bordes
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(20.0),
                             topRight: Radius.circular(20.0),
                           ),
                         ),
-                        color: card.colorBase,
+                        color: card.colorBase, // Color de la base
                                     
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
@@ -128,7 +128,7 @@ class _AnimationsListState extends State<AnimationsList> {
                   ),
                 ),
               );
-            }, childCount: constructorImages.length))
+            }, childCount: constructorImages.length /* Cantidad de scroll a realizar segun la lista de imagenes */ ))  
           ],
         ),
       ),

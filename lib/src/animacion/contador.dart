@@ -9,7 +9,7 @@ class ContadorIncrementar extends StatefulWidget {
 
 class _ContadorIncrementarState extends State<ContadorIncrementar> {
   int _counter = 0; // Contador nuevo que va ir aumentando
-  int? _oldCounter; // Contador que guarda el valor anterior del _counter
+  int? _oldCounter; // Contador viejo que guarda el valor anterior del _counter
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +26,7 @@ class _ContadorIncrementarState extends State<ContadorIncrementar> {
               'You have pushed the button this many times:',
             ),
 
+            // Manejo de la animacion de dos numeros (nuevo y anterior)
             TweenAnimationBuilder<double>(
               tween: Tween(begin: 0.0, end: 1.0), /* Interpolacion del inicio y final de la animación (value) 
                                                   0.0 no va aparecer el valor y 1.0 aparece el valor*/
@@ -33,9 +34,9 @@ class _ContadorIncrementarState extends State<ContadorIncrementar> {
                                             pueda visualizar a la hora de cambiar el 
                                             valor del "_counter" */
               duration: const Duration(milliseconds: 200),
-
               builder: (context, value, _) {
-                // Widget "Stack" permite apilar wiidgets uno encima del otro
+
+                // Widget "Stack" permite apilar widgets uno encima del otro
                 return Stack(
                   children: [
                     /* Condicion que no se cumple cuando inicia la pantalla del contador; 
@@ -74,7 +75,7 @@ class _ContadorIncrementarState extends State<ContadorIncrementar> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           _oldCounter = _counter; /* Se almacena el valor nuevo (_counter) al anterior en "_oldCounter" 
-                                  antes de que se autoincremente el "_counter"*/
+                                  antes de que se auto incremente el "_counter" */
           setState(() {
             _counter++;
           });

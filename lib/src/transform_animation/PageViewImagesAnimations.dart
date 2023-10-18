@@ -18,18 +18,6 @@ class _PageViewImagesAnimationsState extends State<PageViewImagesAnimations> {
     SvgPicture.asset('assets/ImagenesPaisajes/paisajeTwo.svg', width: 50,),
     SvgPicture.asset('assets/ImagenesPaisajes/paisajeThree.svg', width: 50,)
   ];
-  /* Future<void> _loadData() async {
-    final response = await http.get(http://www.json-generator.com/api/json/get/bUbsitaEaG?indent=2);
-    setState(() {
-      _images = (jsonDecode(response.body) as List).map((e) => e["image"].toString()).toList();
-    });
-  }
-
-  @override
-  void initState() {
-    _loadData();
-    super.initState();
-  } */
 
   final _pageController = PageController();  /* Controlador del PageView para 
                                             rastrear la posición actual. */
@@ -42,7 +30,7 @@ class _PageViewImagesAnimationsState extends State<PageViewImagesAnimations> {
     });
   }
 
-  /* Se utilza el "initState" para que vez que cuando el usuario haga un scroll, 
+  /* Se utilza el "initState" para cuando el usuario haga un scroll, 
   se llame al método "_listener()" para manejar los cambios en la posición 
   de la página. Es decir, el metodo "_listener()" actualiza la variable "_currentPage",
   que almacena el valor de la posición actual del PageView como un porcentaje. */
@@ -53,7 +41,7 @@ class _PageViewImagesAnimationsState extends State<PageViewImagesAnimations> {
   }
 
   /* Se utiliza el "dispose" para realizar la limpieza y liberación de recursos 
-  cuando el widget "PageViewImagesAnimations" ya no se necesita, para que no alla 
+  cuando el widget "PageViewImagesAnimations" ya no se este utilizando y para que no alla 
   fugas de memoria ni problemas de recursos */
   @override
   void dispose() {
@@ -66,7 +54,7 @@ class _PageViewImagesAnimationsState extends State<PageViewImagesAnimations> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Animacion PageView"),
+        title: const Text("Animacion PageView"),
       ),
 
       body: Center(
@@ -75,15 +63,15 @@ class _PageViewImagesAnimationsState extends State<PageViewImagesAnimations> {
 
           // Uso del "PageView" para hacer scroll
           child: PageView.builder(
-            controller: _pageController, // permite controlar el desplazamiento o scroll del PageView 
+            controller: _pageController, // permite controlar el desplazamiento o scroll del PageView
             itemCount:  _images.length, // Cantidad de desplazamiento o scroll a realizar
             itemBuilder: ((context, index) {
-              final percent = _currentPage - index;
+              final percent = _currentPage - index; // Calculo de la diferencia entre la posicion del PageView y el index
               final value = percent.clamp(0.0, 1.0); // Se define la interpolación de inicio y final
 
               print(percent); /* Imprime el valor del porcentaje actual al hacer el scroll entre
                               0 y 1 para poder identificar los cambios que hay a la hora de
-                              realizar una animación al hacer un scroll*/
+                              realizar dicha animación */
 
               return Padding(
                 padding: const EdgeInsets.all(20.0),

@@ -35,7 +35,7 @@ class _TransformAnimationsState extends State<TransformAnimations> {
 
           // Transform con animacion de agrandar y desaparecer
           Transform.scale(
-            scale: _value * 4,
+            scale: _value * 4, // Se define el tamaño de la imagen con 4 veces su tamaño original 
             child: SvgPicture.asset( 
               'assets/usuario.svg',
               width: 100,
@@ -44,16 +44,16 @@ class _TransformAnimationsState extends State<TransformAnimations> {
 
           // Transform con rotacion 
           /* Transform.rotate(
-            angle: _value * 6.3,
+            angle: _value * 6.3, // Rotacion de 360 grados en sentido de las agujas del reloj
             child: SvgPicture.asset( 
               'assets/usuario.svg',
               width: 100,
             ),
           ), */
 
-          // Transform con animacion entre el eje X y Y
+          // Transform con animacion de desplazamiento entre el eje X y Y
           /* Transform.translate(
-            offset: Offset(50 * (_value), 0.0), // Animacion del eje X y Y
+            offset: Offset(50 * (_value), 0.0), // Desplazamiento solo en el eje X
             child:  SvgPicture.asset( 
               'assets/usuario.svg',
               width: 50,
@@ -80,6 +80,7 @@ class _TransformAnimationsState extends State<TransformAnimations> {
             height: 80,
           ),
           
+          // Slider para apreciar mejor la animación
           Slider(value: _value, 
             onChanged: (val) {
               setState(() {

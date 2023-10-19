@@ -85,7 +85,7 @@ class Principal extends StatelessWidget {
             ),
 
             ElevatedButton(onPressed: () => 
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const AnimatedBuilderExampleApp())), 
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const SplashScreenT())), 
             child: const Text("SplashScreen 1 prueba")),
 
             const SizedBox(

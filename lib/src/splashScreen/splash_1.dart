@@ -14,9 +14,11 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMixin{
 
   late final AnimationController _controller;
+  late final AnimationController _controllerHOLA;
 
   late Animation<double> controllerReducir;
   late Animation<double> controllerAgrandar;
+  late Animation<double> controllerAgrandarHOLA;
   
   /* late final AnimationController _controller = AnimationController(
     duration: const Duration(seconds: 3),
@@ -26,29 +28,53 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   @override
   void dispose() {
     _controller.dispose();
+    _controllerHOLA.dispose();
     super.dispose();
   }
 
 
   @override
   void initState() {
-    
+    super.initState();
     var timeSplash = Duration(seconds: 4);
     Future.delayed(timeSplash, () {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));;
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
     });
 
 
     _controller = new AnimationController(
       vsync: this,
-      duration: Duration(seconds: 2));
-    
-    controllerAgrandar = Tween(begin: 0.0, end: 0.5).animate(
-        CurvedAnimation(parent: _controller, curve: Interval(0.0, 0.5)));
-    
-    controllerReducir = Tween(begin: 0.5, end: 0.0).animate(
-        CurvedAnimation(parent: _controller, curve: Interval(0.0, 0.5)));
+      duration: Duration(seconds: 2)
+    );
+    _controllerHOLA = new AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 2)
+    );
 
+    controllerAgrandarHOLA = Tween(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _controllerHOLA, curve: Interval(0.0, 1.0)) // Cambia el intervalo
+    );
+    
+    controllerAgrandar = Tween(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _controller, curve: Interval(0.0, 1.0)) // Cambia el intervalo
+    );
+
+    /* controllerAgrandar = Tween(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _controller, curve: Interval(0.5, 1.0)) // Cambia el intervalo
+    ); */
+
+    controllerReducir = Tween(begin: 1.0, end: 0.0).animate(
+      CurvedAnimation(parent: _controller, curve: Interval(0.0, 0.5)) // Cambia el intervalo
+    );
+
+    /* controllerAgrandar = Tween(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _controller, curve: Interval(0.0, 1.0)) // Cambia el intervalo
+    );
+
+    controllerReducir = Tween(begin: 1.0, end: 0.0).animate(
+      CurvedAnimation(parent: _controller, curve: Interval(1.0, 0.0)) // Cambia el intervalo
+    );
+ */
 
     _controller.forward();
     _controller.addListener(() {
@@ -57,12 +83,22 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
       if (_controller.status == AnimationStatus.completed) {
         // controller0.reset();
         // controller0.reverse();
-
-        _controller.repeat();
+        _controller.forward();();
       }
     });
 
-    super.initState();
+    _controllerHOLA.forward();
+    _controllerHOLA.addListener(() {
+      setState(() {
+        if (_controllerHOLA.status == AnimationStatus.completed) {
+        // controller0.reset();
+        // controller0.reverse();
+        _controllerHOLA.reverse();();
+      }
+      });
+    });
+
+    
   }
 
   @override
@@ -72,8 +108,9 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
 
         AnimatedBuilder(animation: _controller,
           builder: (BuildContext context, Widget? child) {
+
           return Transform.scale(
-            scale: (controllerReducir.value) * (MediaQuery.of(context).size.height * 0.03),
+            scale: controllerAgrandar.value * (MediaQuery.of(context).size.height * 0.03),
               child: child,
           );},
           child: Align(
@@ -93,11 +130,15 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
           ),
         ),
 
-        AnimatedBuilder(animation: _controller,
+        AnimatedBuilder(animation: _controllerHOLA,
           builder: (BuildContext context, Widget? child) {
+
           return Transform.scale(
-            //scale: controllerAgrandar.value * (MediaQuery.of(context).size.height * 0.03),
-            scale:  (controllerAgrandar.value + controllerReducir.value) * (MediaQuery.of(context).size.height * 0.03),
+            scale: controllerAgrandarHOLA.value * (MediaQuery.of(context).size.height * 0.03),
+            /* scale: _controller.status != AnimationStatus.completed ?
+            controllerAgrandar.value * (MediaQuery.of(context).size.height * 0.03) :
+            controllerReducir.value * (MediaQuery.of(context).size.height * 0.03), */
+            //scale: (controllerAgrandar.value - controllerReducir.value) * (MediaQuery.of(context).size.height * 0.03),
               child: child,
           );},
           child: Align(

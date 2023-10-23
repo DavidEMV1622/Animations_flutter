@@ -1,0 +1,4 @@
+#Sun Oct 22 19:50:37 COT 2023
+base.0=C\:\\Users\\david\\OneDrive\\Documentos\\Repositorios-Git\\Git-Hub\\Animations_flutter\\build\\app\\intermediates\\dex\\release\\minifyReleaseWithR8\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

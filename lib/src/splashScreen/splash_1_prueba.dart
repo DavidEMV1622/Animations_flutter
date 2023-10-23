@@ -32,7 +32,7 @@ class _SplashScreenTState extends State<SplashScreenT> with TickerProviderStateM
   void initState() {
     super.initState();
     // **** Se define el tiempo a esperar para pasar a la siguiente pantalla **** 
-    var timeSplash = Duration(seconds: 3);
+    var timeSplash = Duration(seconds: 4);
     Future.delayed(timeSplash, () {
       Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
     });
@@ -40,7 +40,7 @@ class _SplashScreenTState extends State<SplashScreenT> with TickerProviderStateM
     // Permite definir el tiempo que va a durar la animación
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 1)
+      duration: const Duration(seconds: 2)
     );
     //..forward(); // "..forward()" permite hacer que se inicie la animación
     
@@ -150,7 +150,7 @@ class _SplashScreenTState extends State<SplashScreenT> with TickerProviderStateM
                 shape: BoxShape.circle,
                 color: Colors.transparent,
                 border: Border.all(
-                  color: Colors.amber,
+                  color: const Color.fromRGBO(255, 182, 0, 1),
                   width: 25.0,
                 ),
               )
@@ -176,7 +176,7 @@ class _SplashScreenTState extends State<SplashScreenT> with TickerProviderStateM
               height: 45,
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
-                color: Colors.blue,
+                color: const Color.fromRGBO(0, 175, 170, 1),
               )
             ),
           ),

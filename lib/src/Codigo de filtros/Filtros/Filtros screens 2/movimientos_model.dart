@@ -1,4 +1,4 @@
-class Movimiento {
+/* class Movimiento {
   late int id;
   late String name;
   late double valor;
@@ -63,4 +63,4 @@ List<Item> filterItems(List<Item> items, String filter) {
     final filterLowerCase = filter.toLowerCase();
     return nameLowerCase.contains(filterLowerCase) || descriptionLowerCase.contains(filterLowerCase);
   }).toList();
-}
+} */
